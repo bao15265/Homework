@@ -192,6 +192,17 @@ public class StringExam {
         return bld;
     }
 
+    public String addTag(String str1, String str2) {
+        String[] htmlTag = {"i", "b", "span", "a"};
+        for (String s : htmlTag) {
+            if (str1.equals(s)) {
+                str = String.format("<%s>%s<%s>", str1, str2, str1);
+                break;
+            }
+        }
+        return str;
+    }
+
     public String printUpperAndLower(String str) {
         return str.toUpperCase() + " " + str.toLowerCase();
     }
