@@ -1,11 +1,8 @@
 package com.b3string;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class StringExam {
+public class StringExercise {
     private char upperC;
     private int count = 0;
     private String str;
@@ -69,7 +66,7 @@ public class StringExam {
     }
 
     public String deleteSpace(String str) {
-        return str.strip();
+        return str.stripLeading();
     }
 
     public int countLowerCase(String str) {
@@ -107,12 +104,7 @@ public class StringExam {
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
-            Integer val = map.get(c);
-            if (val != null) {
-                map.put(c, val + 1);
-            } else {
-                map.put(c, 1);
-            }
+            map.merge(c, 1, Integer::sum);
         }
         return map;
     }
@@ -174,6 +166,17 @@ public class StringExam {
         return this.str;
     }
 
+    public String printLongestWord(String[] array) {
+        int max = array[0].length();
+        for (String s : array) {
+            if (s.length() > max) {
+                max = s.length();
+                str = s;
+            }
+        }
+        return "Longest word: " + str + "\nLength of the longest word: " + max;
+    }
+
     public String swapFirstAndLast(String str) {
         int num = str.length();
         String newStr;
@@ -192,18 +195,40 @@ public class StringExam {
         return bld;
     }
 
+    public String printUniqueWord() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Chuoi can nhap?");
+        str = sc.nextLine();
+        String[] arrayStr = str.split(", ");
+        Arrays.sort(arrayStr);
+        arrayStr[count] = arrayStr[0];
+        for (int i = 0; i < arrayStr.length; i++) {
+            if(!arrayStr[count].equals(arrayStr[i])){
+                count++;
+                arrayStr[count] = arrayStr[i];
+            }
+        }
+        String[] newArray = Arrays.copyOf(arrayStr, count+1);
+        return Arrays.toString(newArray);
+    }
+
     public String addTag(String str1, String str2) {
         String[] htmlTag = {"i", "b", "span", "a"};
         for (String s : htmlTag) {
             if (str1.equals(s)) {
                 str = String.format("<%s>%s<%s>", str1, str2, str1);
                 break;
+            } else {
+                str = String.format("%s not match html tag", str1);
             }
         }
         return str;
     }
 
-    public String printUpperAndLower(String str) {
+    public String printUpperAndLower() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Tu can nhap?");
+        str = sc.nextLine();
         return str.toUpperCase() + " " + str.toLowerCase();
     }
 
