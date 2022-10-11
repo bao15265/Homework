@@ -135,14 +135,17 @@ public class StringExercise {
     }
 
     public String replaceChar(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = i + 1; j < str.length(); j++) {
-                if (str.charAt(i) == str.charAt(j)) {
-                    this.str = str.substring(0, j) + '$' + str.substring(j + 1);
-                }
+        char key = 0;
+        upperC = str.charAt(count);
+        for (int i = 1; i < str.length(); i++) {
+            if (upperC == str.charAt(i)) {
+                key = upperC;
+                break;
+            } else {
+                count++;
             }
         }
-        return this.str;
+        return str.substring(0, count + 1) + str.substring(count + 1).replace(key, '$');
     }
 
     public String swapTwoString(String str1, String str2) {
@@ -203,12 +206,12 @@ public class StringExercise {
         Arrays.sort(arrayStr);
         arrayStr[count] = arrayStr[0];
         for (int i = 0; i < arrayStr.length; i++) {
-            if(!arrayStr[count].equals(arrayStr[i])){
+            if (!arrayStr[count].equals(arrayStr[i])) {
                 count++;
                 arrayStr[count] = arrayStr[i];
             }
         }
-        String[] newArray = Arrays.copyOf(arrayStr, count+1);
+        String[] newArray = Arrays.copyOf(arrayStr, count + 1);
         return Arrays.toString(newArray);
     }
 
