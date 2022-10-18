@@ -243,4 +243,45 @@ public class StringExercise {
         return reverse;
     }
 
+    public String upperAll(String str) {
+        if (str.length() < 4) {
+            System.out.println("error input");
+        } else {
+            String checkStr = str.substring(0, 4);
+            for (int i = 0; i < checkStr.length(); i++) {
+                upperC = checkStr.charAt(i);
+                if (Character.isUpperCase(upperC)) {
+                    count++;
+                }
+            }
+            if (count == 2) {
+                this.str = str.toUpperCase();
+            }
+        }
+        return this.str;
+    }
+
+    public String removeLine(String str) {
+        return str.replace("\n", "").replace("\r", "");
+    }
+
+    public void checkString(String str, Character upperC) {
+        if (str.charAt(0) != upperC) {
+            System.out.println("String doesn't start with " + upperC);
+        } else {
+            System.out.println("String starts with " + upperC);
+        }
+    }
+
+    public String removeIndent(String str) {
+        return str.indent(-100);
+    }
+
+    public String addPrefix(String str, String prefix) {
+        String newStr = prefix + str.indent(-100).replaceAll("\n", "\n" + prefix);
+        count = newStr.length();
+        int num = prefix.length();
+        return newStr.substring(0, count - num);
+    }
+
 }
