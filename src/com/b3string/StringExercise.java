@@ -1,12 +1,12 @@
 package com.b3string;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class StringExercise {
     private char upperC;
     private int count = 0;
     private String str;
-
 
     public void setStr(String str) {
         this.str = str;
@@ -65,7 +65,7 @@ public class StringExercise {
         return specList;
     }
 
-    public String deleteSpace(String str) {
+    public String removeFirstSpace(String str) {
         return str.stripLeading();
     }
 
@@ -278,10 +278,95 @@ public class StringExercise {
     }
 
     public String addPrefix(String str, String prefix) {
-        String newStr = prefix + str.indent(-100).replaceAll("\n", "\n" + prefix);
+        String newStr = prefix + str.indent(-100).replace("\n", "\n" + prefix);
         count = newStr.length();
         int num = prefix.length();
         return newStr.substring(0, count - num);
     }
 
+    public String getPercent(Double num) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        String rtNum = df.format(num);
+        return rtNum + "%";
+    }
+
+    public String getAlign(String str) {
+        count = str.length() + 10;
+        String left = String.format("%-" + count + "s", str);
+        String center = String.format("%" + (count - 5) + "s", str) + String.format("%" + 5 + "s", "");
+        String right = String.format("%" + count + "s", str);
+        return "Left  |" + left + "|" +
+                "\nCenter|" + center + "|" +
+                "\nRight |" + right + "|";
+    }
+
+    public String reverseString(String str) {
+        StringBuilder sbl = new StringBuilder(str);
+        return String.valueOf(sbl.reverse());
+    }
+
+    public void printIndexChar(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            System.out.println(String.format("Current character %c position at %d", str.charAt(i), i));
+        }
+    }
+
+    public List<String> convertToWord(String str) {
+        return List.of(str.strip().split(" +"));
+    }
+
+    public StringBuilder removeSpaces(String str) {
+        StringBuilder sbl = new StringBuilder();
+        String[] list = str.strip().split(" +");
+        for (String s : list) {
+            sbl.append(s);
+        }
+        return sbl;
+    }
+
+    public StringBuilder moveSpaceToFirst(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ' ') {
+                count++;
+            }
+        }
+        StringBuilder sbl = new StringBuilder();
+        sbl.append(" ".repeat(Math.max(0, count)));
+        String[] list = str.strip().split(" +");
+        for (String s : list) {
+            sbl.append(s);
+        }
+        return sbl;
+    }
+
+    public String GlueString() {
+        String tech = "tech";
+        String dot = ".";
+        String io = "io";
+        return "http://" + tech + dot + io + "/";
+    }
+
+    public void checkString(String str) {
+        if (str == null || str.length() == 0) {
+            System.out.println("This string is null or empty");
+        } else {
+            System.out.println("This string is neither null nor empty");
+        }
+    }
+
+    public String countString(String str1, String str2) {
+        int index = 0;
+        while ((index = str1.indexOf(str2, index)) != -1) {
+            index += str2.length();
+            count++;
+        }
+        return String.format("%s has occured %d times in '%s'", str2, count, str1);
+    }
+
+    public StringBuilder leadingZero(int num) {
+        StringBuilder sbl = new StringBuilder();
+        sbl.append("0".repeat(Math.max(0, 10)));
+        sbl.append(num);
+        return sbl;
+    }
 }
